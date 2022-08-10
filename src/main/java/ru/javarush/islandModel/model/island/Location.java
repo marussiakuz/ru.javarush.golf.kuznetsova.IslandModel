@@ -4,12 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.javarush.islandModel.Plant;
-import ru.javarush.islandModel.model.animal.Animal;
-import ru.javarush.islandModel.model.animal.Eatable;
-import ru.javarush.islandModel.model.animal.predator.Predator;
 
-import java.util.List;
+import ru.javarush.islandModel.model.Plant;
+import ru.javarush.islandModel.model.animal.*;
+import ru.javarush.islandModel.settings.Settings;
+
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.Collectors;
 
 @Data
@@ -18,55 +21,64 @@ import java.util.stream.Collectors;
 @Builder
 public class Location {
     private Coordinate coordinate;
-    private List<Animal> animals;
+    private Map<Class<? extends Animal>, List<Animal>> animals = new ConcurrentHashMap<>();
     private boolean isRiver;
     private Plant plant;
+    private final Lock lock = new ReentrantLock(true);
 
-    public boolean hasAnyPredator() {
-        return animals.stream()
-                .anyMatch(animal -> animal instanceof Predator);
+    public Location(Coordinate coordinate) {
+        this.coordinate = coordinate;
     }
 
-    public boolean hasAnyEatable() {
-        return animals.stream()
-                .anyMatch(animal -> animal instanceof Eatable);
-    }
-
-    public boolean hasSomePlant() {
-        return plant.getCurrentWeight() > 0.0;
-    }
-
-    public List<Predator> getAllPredators() {
-        return animals.stream()
-                .filter(animal -> animal instanceof Predator)
-                .map(animal -> (Predator) animal)
+    public List<Animal> getAllAnimals() {
+        return animals.values().stream()
+                .flatMap(Collection::stream)
                 .collect(Collectors.toList());
     }
 
-    public List<Eatable> getAllEatable() {
-        return animals.stream()
-                .filter(animal -> animal instanceof Eatable)
+    public boolean isItPossibleToAddAnimal(Class<? extends Animal> clazz) {
+        return !isRiver && Settings.getSettings().getMaxCountOnLocation().get(clazz) > animals.get(clazz).size();
+    }
+
+    public List<Eatable> getEatablesOfCertainTypes(Set<Class<? extends Eatable>> types) {
+        return types.stream()
+                .map(clazz -> animals.get(clazz))
+                .filter(Objects::nonNull)
+                .flatMap(Collection::stream)
                 .map(animal -> (Eatable) animal)
                 .collect(Collectors.toList());
     }
 
-    public boolean addAnimal(Animal animal) {
-        return animals.add(animal);
+    public boolean isReproductionPossible(Animal animal) {
+        return animals.get(animal.getClass()).stream()
+                .anyMatch(localAnimal -> localAnimal.isMale() != animal.isMale());
     }
 
-    public boolean removeAnimal(Animal animal) {
-        return animals.remove(animal);
+    public void addAnimal(Animal animal) {
+        animals.get(animal.getClass()).add(animal);
     }
 
-    public boolean addPlant(double weight) {
-        if (plant.getCurrentWeight() + weight > 200) return false;
-        plant.setCurrentWeight(plant.getCurrentWeight() + weight);
-        return true;
+    public void addBrood(Class<? extends Animal> clazz, List<Animal> brood) {
+        animals.get(clazz).addAll(brood);
     }
 
-    public boolean removePlant(double weight) {
-        if (plant.getCurrentWeight() - weight < 0) return false;
-        plant.setCurrentWeight(plant.getCurrentWeight() - weight);
-        return true;
+    public void removeAnimal(Animal animal) {
+        animals.get(animal.getClass()).remove(animal);
+    }
+
+    public int getCountOfCertainType(Class<? extends Animal> clazz) {
+        return animals.get(clazz).size();
+    }
+
+    @Override
+    public String toString() {
+        if (isRiver) return "coordinate=" + coordinate + ": " + "There's a RIVER here..";
+        StringBuilder builder = new StringBuilder();
+        animals.forEach((clazz, animalsOfCertainType) ->
+                builder.append(Settings.getSettings().getAnimalPrints().get(clazz))
+                        .append(" ")
+                        .append(animalsOfCertainType.size())
+                        .append(" "));
+        return "coordinate=" + coordinate + ": " + builder;
     }
 }

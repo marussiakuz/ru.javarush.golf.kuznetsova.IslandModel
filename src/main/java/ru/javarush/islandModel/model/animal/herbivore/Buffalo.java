@@ -3,67 +3,33 @@ package ru.javarush.islandModel.model.animal.herbivore;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import ru.javarush.islandModel.Plant;
+
 import ru.javarush.islandModel.model.animal.Animal;
 import ru.javarush.islandModel.model.animal.Eatable;
-import ru.javarush.islandModel.model.island.Coordinate;
+import ru.javarush.islandModel.settings.Settings;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode(callSuper = true)
 @Data
 @Builder
 public class Buffalo extends Animal implements Herbivore, Eatable {
-    private static double weight = 700.0;
-    private static double dailyAllowance = 100.0;
-
-    private static int count;
+    private static double weightAvg = Settings.getSettings().getWeightAvg().get(Buffalo.class);
+    private static double dailyAllowance = Settings.getSettings().getDailyAllowance().get(Buffalo.class);
 
     public Buffalo() {
-        currentWeight = weight;
+        currentWeight = weightAvg;
         isMale = ThreadLocalRandom.current().nextBoolean();
-        saturationWithFood = ThreadLocalRandom.current().nextDouble(dailyAllowance) + 0.01;
-        count++;
+        saturationWithFood = ThreadLocalRandom.current().nextDouble(dailyAllowance);
     }
 
     @Override
-    public boolean starve() {
-        currentWeight *= 0.9;
-        if (currentWeight <= weight/2) {
-            dieOfHunger();
-            return true;
-        }
-        return false;
+    public boolean isHungry() {
+        return saturationWithFood < dailyAllowance;
     }
 
     @Override
-    public void move(Coordinate coordinate) {
-
-    }
-
-    @Override
-    public void reproduce() {
-
-    }
-
-    @Override
-    public void dieOfHunger() {
-        --count;
-    }
-
-    @Override
-    public void beEaten() {
-        --count;
-    }
-
-    @Override
-    public void eat(Plant plant) {
-        double toEat = dailyAllowance - saturationWithFood;
-
-        if (plant.getCurrentWeight() < toEat) toEat = plant.getCurrentWeight();
-
-        plant.setCurrentWeight(plant.getCurrentWeight() - toEat);
-        currentWeight += toEat;
-        saturationWithFood += toEat;
+    public boolean isExhausted() {
+        return currentWeight <= weightAvg / 2;
     }
 }

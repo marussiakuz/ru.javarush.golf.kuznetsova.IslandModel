@@ -4,7 +4,109 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="11386837-d5a1-4414-88d3-1a8e61027a4a" name="Changes" comment="" />
+    <list default="true" id="11386837-d5a1-4414-88d3-1a8e61027a4a" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/RandomService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/enums/Direction.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/model/AnimalTypeInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/model/Plant.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/repository/LocationRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/repository/LocationRepositoryImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/repository/Statistics.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/service/AnimalService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/service/LocationService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/settings/DefaultSettings.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/settings/Settings.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/threads/IslandManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/threads/LocationManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/threads/Runner.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/threads/tasks/AnimalLocalTask.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/threads/tasks/LocalTask.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/threads/tasks/PlantLocalTask.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/config.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/InfoThread.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/Life.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/LifeOnTheIslandApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/IslandModelApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/Plant.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/Settings.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/model/action/ActionThread.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/model/action/eating/Eating.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/model/action/moving/Moving.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/model/action/reproduction/Reproduction.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/model/animal/Animal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/model/animal/Animal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/model/animal/AnimalFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/model/animal/AnimalFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/model/animal/AnimalNotFoundException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/model/animal/Eatable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/model/animal/Eatable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/model/animal/herbivore/Buffalo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/model/animal/herbivore/Buffalo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/model/animal/herbivore/Caterpillar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/model/animal/herbivore/Caterpillar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/model/animal/herbivore/Deer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/model/animal/herbivore/Deer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/model/animal/herbivore/Goat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/model/animal/herbivore/Goat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/model/animal/herbivore/Herbivore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/model/animal/herbivore/Herbivore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/model/animal/herbivore/Horse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/model/animal/herbivore/Horse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/model/animal/herbivore/Rabbit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/model/animal/herbivore/Rabbit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/model/animal/herbivore/Sheep.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/model/animal/herbivore/Sheep.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/model/animal/omnivore/Duck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/model/animal/omnivore/Duck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/model/animal/omnivore/Hog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/model/animal/omnivore/Hog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/model/animal/omnivore/Mouse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/model/animal/omnivore/Mouse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/model/animal/predator/Bear.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/model/animal/predator/Bear.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/model/animal/predator/Eagle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/model/animal/predator/Eagle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/model/animal/predator/Fox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/model/animal/predator/Fox.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/model/animal/predator/Predator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/model/animal/predator/Predator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/model/animal/predator/Python.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/model/animal/predator/Python.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/model/animal/predator/Wolf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/model/animal/predator/Wolf.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/model/island/Island.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/model/island/Location.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/model/island/Location.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/javarush/islandModel/model/island/River.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ru/javarush/islandModel/LifeOnTheIslandApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/javarush/islandModel/IslandModelApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/InfoThread.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/Life.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/LifeOnTheIslandApplication.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/Plant$PlantBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/Plant.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/Settings.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/action/ActionThread.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/action/eating/Eating.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/action/moving/Moving.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/action/reproduction/Reproduction.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/animal/Animal.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/animal/Animal.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/animal/AnimalFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/animal/AnimalFactory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/animal/AnimalNotFoundException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/animal/Eatable.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/animal/Eatable.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/animal/herbivore/Buffalo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/animal/herbivore/Buffalo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/animal/herbivore/Caterpillar$CaterpillarBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/animal/herbivore/Caterpillar$CaterpillarBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/animal/herbivore/Caterpillar.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/animal/herbivore/Caterpillar.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/animal/herbivore/Deer$DeerBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/animal/herbivore/Deer$DeerBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/animal/herbivore/Deer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/animal/herbivore/Deer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/animal/herbivore/Goat$GoatBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/animal/herbivore/Goat$GoatBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/animal/herbivore/Goat.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/animal/herbivore/Goat.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/animal/herbivore/Herbivore.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/animal/herbivore/Herbivore.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/animal/herbivore/Horse$HorseBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/animal/herbivore/Horse$HorseBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/animal/herbivore/Horse.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/animal/herbivore/Horse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/animal/herbivore/Rabbit.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/animal/herbivore/Rabbit.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/animal/herbivore/Sheep.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/animal/herbivore/Sheep.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/animal/omnivore/Duck$DuckBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/animal/omnivore/Duck$DuckBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/animal/omnivore/Duck.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/animal/omnivore/Duck.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/animal/omnivore/Hog$HogBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/animal/omnivore/Hog$HogBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/animal/omnivore/Hog.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/animal/omnivore/Hog.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/animal/omnivore/Mouse$MouseBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/animal/omnivore/Mouse$MouseBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/animal/omnivore/Mouse.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/animal/omnivore/Mouse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/animal/predator/Bear$BearBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/animal/predator/Bear$BearBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/animal/predator/Bear.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/animal/predator/Bear.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/animal/predator/Eagle.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/animal/predator/Eagle.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/animal/predator/Fox.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/animal/predator/Fox.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/animal/predator/Predator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/animal/predator/Predator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/animal/predator/Python.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/animal/predator/Python.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/animal/predator/Wolf.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/animal/predator/Wolf.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/island/Island.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/island/Location$LocationBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/island/Location$LocationBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/island/Location.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/island/Location.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/island/River$RiverBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ru/javarush/islandModel/model/island/River.class" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,6 +116,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
+        <option value="AnnotationType" />
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -31,43 +135,47 @@
       </MavenGeneralSettings>
     </option>
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectId" id="2CHpdjKeUmVBPwbBPX3CN6eXLwH" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "project.structure.last.edited": "SDKs",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.0",
-    "run.code.analysis.last.selected.profile": "pProject Default"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/Marya/ru.javarush.golf.kuznetsova.IslandModel&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;03d5ca6691153c6012975f60db67c121&quot;
   }
-}]]></component>
-  <component name="RunManager" selected="Application.ru.javarush.islandModel.Life">
-    <configuration name="ru.javarush.islandModel.Life" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="ru.javarush.islandModel.Life" />
-      <module name="ru.javarush.golf.kuznetsova.IslandModel" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="ru.javarush.islandModel.model.animal.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ru.javarush.islandModel.LifeOnTheIslandApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="ru.javarush.islandModel.LifeOnTheIslandApplication" />
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="ru.javarush.islandModel" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Spring Boot.IslandModelApplication">
+    <configuration name="IslandModelApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ru.javarush.islandModel.IslandModelApplication" />
       <module name="ru.javarush.golf.kuznetsova.IslandModel" />
       <extension name="coverage">
         <pattern>
@@ -79,34 +187,43 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
+    <configuration name="ru.javarush.islandModel.threads.Runner" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ru.javarush.islandModel.threads.Runner" />
       <module name="ru.javarush.golf.kuznetsova.IslandModel" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ru.javarush.islandModel.model.animal.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+    <configuration name="IslandModelApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <option name="ACTIVE_PROFILES" />
       <module name="ru.javarush.golf.kuznetsova.IslandModel" />
-      <option name="filePath" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="ru.javarush.islandModel.IslandModelApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="LifeOnTheIslandApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-      <module name="ru.javarush.golf.kuznetsova.IslandModel" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="ru.javarush.islandModel.LifeOnTheIslandApplication" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+    <list>
+      <item itemvalue="Application.ru.javarush.islandModel.threads.Runner" />
+      <item itemvalue="Application.IslandModelApplication" />
+      <item itemvalue="Spring Boot.IslandModelApplication" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.ru.javarush.islandModel.Life" />
-        <item itemvalue="Application.ru.javarush.islandModel.LifeOnTheIslandApplication" />
+        <item itemvalue="Application.ru.javarush.islandModel.threads.Runner" />
+        <item itemvalue="Application.IslandModelApplication" />
       </list>
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SpringBootOptions">
+    <option name="showAdditionalConfigNotification" value="false" />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="11386837-d5a1-4414-88d3-1a8e61027a4a" name="Changes" comment="" />
@@ -115,11 +232,25 @@
       <option name="presentableId" value="Default" />
       <updated>1658469456140</updated>
       <workItem from="1658469457934" duration="64165000" />
-      <workItem from="1658824106013" duration="72918000" />
+      <workItem from="1658824106013" duration="100526000" />
+      <workItem from="1659106108247" duration="21569000" />
+      <workItem from="1659505716995" duration="146861000" />
+      <workItem from="1660047090484" duration="37890000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
