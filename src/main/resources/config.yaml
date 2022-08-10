@@ -73,7 +73,7 @@ dailyAllowance:
   ru.javarush.islandModel.model.animal.omnivore.Duck: 0.15
   ru.javarush.islandModel.model.animal.predator.Wolf: 8.0
   ru.javarush.islandModel.model.animal.predator.Eagle: 1.0
-  ru.javarush.islandModel.model.animal.herbivore.Caterpillar: 0.0
+  ru.javarush.islandModel.model.animal.herbivore.Caterpillar: 0.1
   ru.javarush.islandModel.model.animal.herbivore.Deer: 50.0
   ru.javarush.islandModel.model.animal.omnivore.Hog: 50.0
   ru.javarush.islandModel.model.animal.herbivore.Buffalo: 100.0
@@ -105,7 +105,7 @@ maxCountOfBrood:
   ru.javarush.islandModel.model.animal.omnivore.Duck: 20
   ru.javarush.islandModel.model.animal.predator.Wolf: 6
   ru.javarush.islandModel.model.animal.predator.Eagle: 8
-  ru.javarush.islandModel.model.animal.herbivore.Caterpillar: 40
+  ru.javarush.islandModel.model.animal.herbivore.Caterpillar: 1000
   ru.javarush.islandModel.model.animal.herbivore.Deer: 3
   ru.javarush.islandModel.model.animal.omnivore.Hog: 3
   ru.javarush.islandModel.model.animal.herbivore.Buffalo: 3

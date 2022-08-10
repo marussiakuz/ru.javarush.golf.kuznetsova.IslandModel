@@ -49,6 +49,10 @@ public class AnimalService {
             prev.add(current);
             ++count;
         }
+        if (animal.isExhausted()) {
+            Statistics.addDiedOfHunger(animal.getClass());
+            delete(animal);
+        }
     }
 
     public void eat(Animal animal) {
@@ -158,7 +162,9 @@ public class AnimalService {
                 double victimWeight = ((Animal) localPotentialVictim).getCurrentWeight();
                 delete((Animal) localPotentialVictim);
                 animal.setCurrentWeight(animal.getCurrentWeight() + victimWeight);
-                animal.setSaturationWithFood(animal.getSaturationWithFood() + victimWeight);
+                double currentSaturationWithFood = animal.getSaturationWithFood() + victimWeight;
+                double dailyAllowance = Settings.getSettings().getDailyAllowance().get(animal.getClass());
+                animal.setSaturationWithFood(Math.min(currentSaturationWithFood, dailyAllowance));
                 Statistics.addEatenAnimal(localPotentialVictim.getClass());
             } else animal.starve();
         }
@@ -167,6 +173,16 @@ public class AnimalService {
     private void eatPlant(Animal animal) {
         Location current = locationRepository.getLocationByCoordinate(animal.getCurrentCoordinate());
         Plant plant = current.getPlant();
+
+        if (plant.getCurrentWeight() <= 0.5) {
+            animal.starve();
+            return;
+        }
+        if (animal instanceof Caterpillar) {
+            plant.setCurrentWeight(plant.getCurrentWeight() - DAILY_ALLOWANCE.get(Caterpillar.class));
+            animal.setSaturationWithFood(DAILY_ALLOWANCE.get(Caterpillar.class));
+            return;
+        }
 
         double howMuchToEat = DAILY_ALLOWANCE.get(animal.getClass()) - animal.getSaturationWithFood();
         if (plant.getCurrentWeight() < howMuchToEat) howMuchToEat = plant.getCurrentWeight();

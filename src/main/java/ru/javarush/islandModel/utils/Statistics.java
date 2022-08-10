@@ -4,7 +4,6 @@ import ru.javarush.islandModel.model.AnimalTypeInfo;
 import ru.javarush.islandModel.model.Plant;
 import ru.javarush.islandModel.model.animal.Animal;
 import ru.javarush.islandModel.model.animal.Eatable;
-import ru.javarush.islandModel.model.animal.herbivore.Caterpillar;
 import ru.javarush.islandModel.model.island.Location;
 import ru.javarush.islandModel.service.LocationService;
 import ru.javarush.islandModel.settings.Settings;
@@ -41,7 +40,7 @@ public class Statistics {
         printWasEaten();
         printDiedOfHunger();
         printCountOfBrood();
-        Statistics.clearPrevCycle();
+        clearPrevCycle();
         System.out.println("__________________________________________________________________________");
     }
 
@@ -95,7 +94,7 @@ public class Statistics {
                 });
 
         if (!areThereAnyEaten.get()) System.out.println("During the last time not a single animal has been eaten");
-        else System.out.println("During the last time have been eaten: \n" + infoLastTime.append("\n"));
+        else System.out.println("During the last day have been eaten: \n" + infoLastTime.append("\n"));
     }
 
     private void printDiedOfHunger() {
@@ -125,7 +124,7 @@ public class Statistics {
 
         if (!areThereAnyDiedOfHunger.get()) System.out.println("During the last time not a single animal has been died " +
                 "of hunger");
-        else System.out.println("During the last time have been died of hunger: \n" + infoLastTime.append("\n"));
+        else System.out.println("During the last day have been died of hunger: \n" + infoLastTime.append("\n"));
     }
 
     private void printCountOfBrood() {
@@ -154,7 +153,7 @@ public class Statistics {
                 });
 
         if (!areThereAnyBrood.get()) System.out.println("During the last time not a single animal were born");
-        else System.out.println("During the last time were born: \n" + infoLastTime.append("\n"));
+        else System.out.println("During the last day were born: \n" + infoLastTime.append("\n"));
     }
 
     private AnimalTypeInfo getAnimalTypeInfo(Class<? extends Animal> clazz, String print) {
@@ -167,8 +166,7 @@ public class Statistics {
                 .map(Location::getAnimals)
                 .map(map -> map.get(clazz))
                 .flatMap(Collection::stream)
-                .peek(animal -> sumSaturationWithFood.getAndUpdate(v -> v + (animal instanceof Caterpillar ?
-                                100.0 : animal.getSaturationWithFood())))
+                .peek(animal -> sumSaturationWithFood.getAndUpdate(v -> v + animal.getSaturationWithFood()))
                 .peek(animal -> {
                     if(animal.isMale()) maleCount.addAndGet(1);
                     else femaleCount.addAndGet(1);
@@ -179,7 +177,7 @@ public class Statistics {
                 .totalCount(totalCount)
                 .male(maleCount.get())
                 .female(femaleCount.get())
-                .averageSaturationWithFood((sumSaturationWithFood.get()/totalCount * 100)
+                .averageSaturationWithFood(totalCount == 0? 0 : (sumSaturationWithFood.get()/totalCount * 100)
                         / Settings.getSettings().getDailyAllowance().get(clazz))
                 .print(print)
                 .build();
@@ -190,6 +188,6 @@ public class Statistics {
                 .filter(location -> !location.isRiver())
                 .map(Location::getPlant)
                 .mapToDouble(Plant::getCurrentWeight)
-                .sum() / locationService.getLocations().size();
+                .sum() / locationService.getLocations().stream().filter(location -> !location.isRiver()).count();
     }
 }

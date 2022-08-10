@@ -25,7 +25,7 @@ public class Caterpillar extends Animal implements Herbivore, Eatable {
 
     @Override
     public boolean isHungry() {
-        return saturationWithFood < dailyAllowance;
+        return true;
     }
 
     @Override
