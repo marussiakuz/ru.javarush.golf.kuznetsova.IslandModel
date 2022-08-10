@@ -12,8 +12,8 @@ import ru.javarush.islandModel.model.animal.Animal;
 import ru.javarush.islandModel.model.animal.Eatable;
 import ru.javarush.islandModel.model.animal.predator.Predator;
 
-import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -39,7 +39,7 @@ public class Settings {
     private int corePoolSize;
 
     @JsonIgnore
-    public static final String CONFIG_YAML = "/Users/Marya/ru.javarush.golf.kuznetsova.IslandModel/src/main/resources/config.yaml";
+    public static final String CONFIG_YAML = "src/main/resources/config.yaml";
 
     @JsonIgnore
     private static volatile Settings settings;
@@ -76,7 +76,7 @@ public class Settings {
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
         ObjectReader reader = mapper.readerForUpdating(this);
         try {
-            reader.readValue(new File(CONFIG_YAML));
+            reader.readValue(Paths.get(CONFIG_YAML).toAbsolutePath().toFile());
         } catch (IOException e) {
             log.info("failed attempt to download settings from a yaml file {}", CONFIG_YAML);
         }
