@@ -160,11 +160,10 @@ public class AnimalService {
             if (!animal.isHungry()) break;
             if (RandomService.haveEaten((Predator) animal, localPotentialVictim)) {
                 double victimWeight = ((Animal) localPotentialVictim).getCurrentWeight();
+                double currentSaturationWithFood = animal.getSaturationWithFood() + victimWeight;
                 delete((Animal) localPotentialVictim);
                 animal.setCurrentWeight(animal.getCurrentWeight() + victimWeight);
-                double currentSaturationWithFood = animal.getSaturationWithFood() + victimWeight;
-                double dailyAllowance = Settings.getSettings().getDailyAllowance().get(animal.getClass());
-                animal.setSaturationWithFood(Math.min(currentSaturationWithFood, dailyAllowance));
+                animal.setSaturationWithFood(Math.min(currentSaturationWithFood, DAILY_ALLOWANCE.get(animal.getClass())));
                 Statistics.addEatenAnimal(localPotentialVictim.getClass());
             } else animal.starve();
         }
