@@ -9,7 +9,6 @@ import ru.javarush.islandModel.model.island.Coordinate;
 
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class AnimalFactory {
 

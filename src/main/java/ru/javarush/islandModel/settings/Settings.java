@@ -1,10 +1,8 @@
 package ru.javarush.islandModel.settings;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectReader;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
 import lombok.*;
@@ -81,17 +79,6 @@ public class Settings {
             reader.readValue(new File(CONFIG_YAML));
         } catch (IOException e) {
             log.info("failed attempt to download settings from a yaml file {}", CONFIG_YAML);
-        }
-    }
-
-    @Override
-    public String toString() {
-        ObjectMapper yaml = new ObjectMapper(new YAMLFactory());
-        yaml.enable(SerializationFeature.INDENT_OUTPUT);
-        try {
-            return yaml.writeValueAsString(this);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException();
         }
     }
 }

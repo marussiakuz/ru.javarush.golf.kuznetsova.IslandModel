@@ -6,6 +6,7 @@ import ru.javarush.islandModel.service.AnimalService;
 import ru.javarush.islandModel.service.LocationService;
 import ru.javarush.islandModel.threads.tasks.AnimalLocalTask;
 import ru.javarush.islandModel.threads.tasks.LocalTask;
+import ru.javarush.islandModel.threads.tasks.PlantLocalTask;
 
 import java.util.List;
 import java.util.Objects;
@@ -24,7 +25,8 @@ public class LocationManager implements Runnable {
 
     @Override
     public void run() {
-        locationService.getLocations()
+        locationService.getLocations().stream()
+                .filter(location -> !location.isRiver())
                 .forEach(this::setLocalTask);
     }
 
@@ -36,6 +38,7 @@ public class LocationManager implements Runnable {
             localAnimals.stream()
                     .filter(Objects::nonNull)
                     .forEach(animal -> tasks.add(new AnimalLocalTask(animal, animalService)));
+            tasks.add(new PlantLocalTask(location.getPlant()));
         } finally {
             location.getLock().unlock();
         }

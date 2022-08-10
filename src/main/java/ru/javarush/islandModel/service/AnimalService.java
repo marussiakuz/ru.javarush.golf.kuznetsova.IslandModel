@@ -168,11 +168,11 @@ public class AnimalService {
         Location current = locationRepository.getLocationByCoordinate(animal.getCurrentCoordinate());
         Plant plant = current.getPlant();
 
-        //double howMuchToEat = DAILY_ALLOWANCE.get(animal.getClass()) - animal.getSaturationWithFood();
-        double howMuchToEat = 1.0;
+        double howMuchToEat = DAILY_ALLOWANCE.get(animal.getClass()) - animal.getSaturationWithFood();
         if (plant.getCurrentWeight() < howMuchToEat) howMuchToEat = plant.getCurrentWeight();
 
         animal.setCurrentWeight(animal.getCurrentWeight() + howMuchToEat);
+        plant.setCurrentWeight(plant.getCurrentWeight() - howMuchToEat);
         animal.setSaturationWithFood(animal.getSaturationWithFood() + howMuchToEat);
     }
 }

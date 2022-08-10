@@ -1,7 +1,6 @@
 package ru.javarush.islandModel.service;
 
 import org.springframework.stereotype.Service;
-import ru.javarush.islandModel.model.island.Coordinate;
 import ru.javarush.islandModel.model.island.Location;
 import ru.javarush.islandModel.repository.LocationRepository;
 
@@ -22,9 +21,5 @@ public class LocationService {
 
     public void initializeIsland(int width, int length) {
         locationRepository.initializeIsland(width, length);
-    }
-
-    public void getLocationByCoordinate(Coordinate coordinate) {
-        locationRepository.getLocationByCoordinate(coordinate);
     }
 }

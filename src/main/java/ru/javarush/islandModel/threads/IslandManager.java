@@ -26,7 +26,7 @@ public class IslandManager extends Thread {
     @Override
     public void run() {
         ScheduledExecutorService executorService = Executors.newScheduledThreadPool(CORE_POOL_SIZE);
-        executorService.scheduleWithFixedDelay(this::executeLocationManager, DURING_OF_CYCLE,
+        executorService.scheduleWithFixedDelay(this::executeLocationManager, 0L,
                 DURING_OF_CYCLE, TimeUnit.MILLISECONDS);
     }
 
