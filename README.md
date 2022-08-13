@@ -8,7 +8,7 @@ ru.javarush.golf.kuznetsova.IslandModel
    to previous locations within one cycle.
 2. Animals eat only if they are hungry, and try to eat until they are full or have exhausted their attempts to eat.
 3. Starvation increases with every step taken and unsuccessful attempts to eat. Fasting is accompanied by weight loss 
-   and decreased satiety. Percent weight loss and percent reduced satiety can be set in the config.yaml
+   and decreased satiety. Percent weight loss and percent reduced satiety can be set in the config.yaml. 
    The animal becomes exhausted with a weight loss of more than 50% and dies of hunger.
 4. Animals can reproduce only if they are not hungry, there is a couple of the opposite sex and the couple also should 
    not be hungry.
@@ -21,4 +21,12 @@ You can also turn on or off the printing of statistics by location in the config
 
 The approximate data output looks like this:
 
+<img width="600" alt="Снимок экрана 2022-08-13 в 22 39 59" src="https://user-images.githubusercontent.com/96682553/184510187-3e397d62-5a87-421c-92f5-6531f56f9d14.png">
 
+If the output of statistics for each location is enabled:
+
+<img width="944" alt="Снимок экрана 2022-08-13 в 22 43 20" src="https://user-images.githubusercontent.com/96682553/184510309-bfd8cfa0-fa54-41b3-a730-a6b0cef37631.png">
+
+End of the game:
+
+<img width="861" alt="Снимок экрана 2022-08-13 в 22 42 37" src="https://user-images.githubusercontent.com/96682553/184510276-f832b97f-7f3c-4c62-a273-40e030de296f.png">
