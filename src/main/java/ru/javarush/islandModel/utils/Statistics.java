@@ -1,9 +1,9 @@
 package ru.javarush.islandModel.utils;
 
+import lombok.Getter;
 import ru.javarush.islandModel.model.AnimalTypeInfo;
 import ru.javarush.islandModel.model.Plant;
 import ru.javarush.islandModel.model.animal.Animal;
-import ru.javarush.islandModel.model.animal.Eatable;
 import ru.javarush.islandModel.model.island.Location;
 import ru.javarush.islandModel.service.LocationService;
 import ru.javarush.islandModel.settings.Settings;
@@ -17,15 +17,21 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public class Statistics {
     private final LocationService locationService;
-    private static Map<Class<? extends Eatable>, Long> wasEatenFromStart = new ConcurrentHashMap<>();
-    private static Map<Class<? extends Eatable>, Long> wasEatenForLastCycle = new ConcurrentHashMap<>();
+    private static Map<Class<? extends Animal>, Long> wasEatenFromStart = new ConcurrentHashMap<>();
+    private static Map<Class<? extends Animal>, Long> wasEatenForLastCycle = new ConcurrentHashMap<>();
     private static Map<Class<? extends Animal>, Long> diedOfHungerFromStart = new ConcurrentHashMap<>();
     private static Map<Class<? extends Animal>, Long> diedOfHungerForLastCycle = new ConcurrentHashMap<>();
     private static Map<Class<? extends Animal>, Long> wasBornFromStart = new ConcurrentHashMap<>();
     private static Map<Class<? extends Animal>, Long> wasBornForLastCycle = new ConcurrentHashMap<>();
+    private static Map<Class<? extends Animal>, Long> initialNumberOfAnimals = new ConcurrentHashMap<>();
+    private static Map<Class<? extends Animal>, Long> lastNumberOfAnimals = new ConcurrentHashMap<>();
+    private static Map<Class<? extends Animal>, Long> extinctTypeOfAnimals = new ConcurrentHashMap<>();
+    private static double initialPlantWeight;
+    private static double lastPlantWeight;
     private final static Map<Class<? extends Animal>, String> ANIMAL_PRINTS = Settings.getSettings().getAnimalPrints();
     private final static String PLANT_PRINT = Settings.getSettings().getPlantPrint();
     private static long countOfCycles;
+    private static boolean haveCriticalNumberOfAnimalsDied;
 
     public Statistics(LocationService locationService) {
         this.locationService = locationService;
@@ -34,17 +40,30 @@ public class Statistics {
     public void printStatistics() {
         System.out.println("Day " + ++countOfCycles);
         ANIMAL_PRINTS.forEach((clazz, print) -> {
-            System.out.println(getAnimalTypeInfo(clazz, print));
+            AnimalTypeInfo info = getAnimalTypeInfo(clazz, print);
+            System.out.println(info);
+            if (info.getTotalCount() == 0 && !extinctTypeOfAnimals.containsKey(clazz)) {
+                extinctTypeOfAnimals.put(clazz, countOfCycles);
+            }
+            if (extinctTypeOfAnimals.size() >= Settings.getSettings().getCriticalNumberExtinctTypes()
+                    || extinctTypeOfAnimals.size() == ANIMAL_PRINTS.size())
+                haveCriticalNumberOfAnimalsDied = true;
         });
-        System.out.println(getPlantInfo(PLANT_PRINT) + "\n");
-        printWasEaten();
-        printDiedOfHunger();
-        printCountOfBrood();
+        System.out.println(getPlantInfo() + "\n");
+
+        printAnimalsChanges(StateOfAnimal.BE_EATEN);
+        System.out.println("___");
+        printAnimalsChanges(StateOfAnimal.DIED_OF_HUNGER);
+        System.out.println("___");
+        printAnimalsChanges(StateOfAnimal.BE_BORN);
+
+        if (Settings.getSettings().isGetOnLocationStatistics()) printLocationStatistics();
+
         clearPrevCycle();
         System.out.println("__________________________________________________________________________");
     }
 
-    public static void addEatenAnimal(Class<? extends Eatable> clazz) {
+    public static void addEatenAnimal(Class<? extends Animal> clazz) {
         wasEatenFromStart.put(clazz, wasEatenFromStart.containsKey(clazz) ? wasEatenFromStart.get(clazz) + 1 : 1);
         wasEatenForLastCycle.put(clazz, wasEatenForLastCycle.containsKey(clazz) ? wasEatenForLastCycle.get(clazz) + 1
                 : 1);
@@ -63,97 +82,78 @@ public class Statistics {
                 wasBornForLastCycle.get(clazz) + count : 1);
     }
 
+    public void printStatisticsAfterGameOver() {
+        System.out.printf("The game lasted %s days. During this time, the following changes occurred: \n" +
+                "initial    last day    percentage change \n", countOfCycles);
+        ANIMAL_PRINTS.forEach((clazz, print) -> {
+            printFinalResult(initialNumberOfAnimals.get(clazz), lastNumberOfAnimals.get(clazz), print);
+        });
+        printFinalResult((int)initialPlantWeight, (int)lastPlantWeight, PLANT_PRINT);
+        extinctTypeOfAnimals.forEach((clazz, day) ->
+                System.out.printf("%s disappeared on day %s \n", ANIMAL_PRINTS.get(clazz), day));
+    }
+
+    public static boolean isHaveCriticalNumberOfAnimalsDied() {
+        return haveCriticalNumberOfAnimalsDied;
+    }
+
     private static void clearPrevCycle() {
         wasEatenForLastCycle.clear();
         diedOfHungerForLastCycle.clear();
         wasBornForLastCycle.clear();
     }
 
-    private void printWasEaten() {
-        AtomicBoolean areThereAnyEaten = new AtomicBoolean(false);
+    private void printAnimalsChanges(StateOfAnimal state) {
+        Map<Class<? extends Animal>, Long> fromStart = getDataFromStart(state);
+        Map<Class<? extends Animal>, Long> forLastCycle = getDataForLastCycle(state);
+
+        AtomicBoolean areThereAny = new AtomicBoolean(false);
         StringBuilder infoFromStart = new StringBuilder();
 
-        wasEatenFromStart.entrySet().stream()
+        fromStart.entrySet().stream()
                 .filter(entry -> entry.getValue() > 0)
                 .forEach(entry -> {
                     infoFromStart.append(String.format("%s %s ", ANIMAL_PRINTS.get(entry.getKey()), entry.getValue()));
-                    areThereAnyEaten.set(true);
+                    areThereAny.set(true);
                 });
 
-        if (!areThereAnyEaten.get()) System.out.println("Since the start of the game not a single animal has been eaten");
-        else System.out.println("Since the start of the game have been eaten: \n" + infoFromStart.append("\n"));
+        if (!areThereAny.get()) System.out.printf("Since the start of the game not a single animal %s \n", state.singular);
+        else System.out.printf("Since the start of the game %s: \n" + infoFromStart.append("\n"), state.plural);
 
-        areThereAnyEaten.set(false);
+        areThereAny.set(false);
         StringBuilder infoLastTime = new StringBuilder();
 
-        Statistics.wasEatenForLastCycle.entrySet().stream()
+        forLastCycle.entrySet().stream()
                 .filter(entry -> entry.getValue() > 0)
                 .forEach(entry -> {
                     infoLastTime.append(String.format("%s %s ", ANIMAL_PRINTS.get(entry.getKey()), entry.getValue()));
-                    areThereAnyEaten.set(true);
+                    areThereAny.set(true);
                 });
 
-        if (!areThereAnyEaten.get()) System.out.println("During the last time not a single animal has been eaten");
-        else System.out.println("During the last day have been eaten: \n" + infoLastTime.append("\n"));
+        if (!areThereAny.get()) System.out.printf("During the last time not a single animal %s \n", state.singular);
+        else System.out.printf("During the last day %s: \n" + infoLastTime.append("\n"), state.plural);
     }
 
-    private void printDiedOfHunger() {
-        AtomicBoolean areThereAnyDiedOfHunger = new AtomicBoolean(false);
-        StringBuilder infoFromStart = new StringBuilder();
-
-        Statistics.diedOfHungerFromStart.entrySet().stream()
-                .filter(entry -> entry.getValue() > 0)
-                .forEach(entry -> {
-                    infoFromStart.append(String.format("%s %s ", ANIMAL_PRINTS.get(entry.getKey()), entry.getValue()));
-                    areThereAnyDiedOfHunger.set(true);
-                });
-
-        if (!areThereAnyDiedOfHunger.get()) System.out.println("Since the start of the game not a single animal " +
-                "has been died of hunger");
-        else System.out.println("Since the start of the game have been died of hunger: \n" + infoFromStart.append("\n"));
-
-        areThereAnyDiedOfHunger.set(false);
-        StringBuilder infoLastTime = new StringBuilder();
-
-        Statistics.diedOfHungerForLastCycle.entrySet().stream()
-                .filter(entry -> entry.getValue() > 0)
-                .forEach(entry -> {
-                    infoLastTime.append(String.format("%s %s ", ANIMAL_PRINTS.get(entry.getKey()), entry.getValue()));
-                    areThereAnyDiedOfHunger.set(true);
-                });
-
-        if (!areThereAnyDiedOfHunger.get()) System.out.println("During the last time not a single animal has been died " +
-                "of hunger");
-        else System.out.println("During the last day have been died of hunger: \n" + infoLastTime.append("\n"));
+    private Map<Class<? extends Animal>, Long> getDataFromStart(StateOfAnimal state) {
+        return switch (state.name()) {
+            case "BE_EATEN" -> wasEatenFromStart;
+            case "DIED_OF_HUNGER" -> diedOfHungerFromStart;
+            default -> wasBornFromStart;
+        };
     }
 
-    private void printCountOfBrood() {
-        AtomicBoolean areThereAnyBrood = new AtomicBoolean(false);
-        StringBuilder infoFromStart = new StringBuilder();
+    private Map<Class<? extends Animal>, Long> getDataForLastCycle(StateOfAnimal state) {
+        return switch (state.name()) {
+            case "BE_EATEN" -> wasEatenForLastCycle;
+            case "DIED_OF_HUNGER" -> diedOfHungerForLastCycle;
+            default -> wasBornForLastCycle;
+        };
+    }
 
-        Statistics.wasBornFromStart.entrySet().stream()
-                .filter(entry -> entry.getValue() > 0)
-                .forEach(entry -> {
-                    infoFromStart.append(String.format("%s %s ", ANIMAL_PRINTS.get(entry.getKey()), entry.getValue()));
-                    areThereAnyBrood.set(true);
-                });
-
-        if (!areThereAnyBrood.get()) System.out.println("Since the start of the game not a single animal " +
-                "has been born");
-        else System.out.println("Since the start of the game were born: \n" + infoFromStart.append("\n"));
-
-        areThereAnyBrood.set(false);
-        StringBuilder infoLastTime = new StringBuilder();
-
-        Statistics.wasBornForLastCycle.entrySet().stream()
-                .filter(entry -> entry.getValue() > 0)
-                .forEach(entry -> {
-                    infoLastTime.append(String.format("%s %s ", ANIMAL_PRINTS.get(entry.getKey()), entry.getValue()));
-                    areThereAnyBrood.set(true);
-                });
-
-        if (!areThereAnyBrood.get()) System.out.println("During the last time not a single animal were born");
-        else System.out.println("During the last day were born: \n" + infoLastTime.append("\n"));
+    private void printLocationStatistics() {
+        System.out.println("___ \nStatistics for each location: \n");
+        locationService.getLocations()
+                .forEach(System.out::println);
     }
 
     private AnimalTypeInfo getAnimalTypeInfo(Class<? extends Animal> clazz, String print) {
@@ -173,6 +173,8 @@ public class Statistics {
                 })
                 .count();
 
+        saveAnimalTypeInfo(clazz, totalCount);
+
         return AnimalTypeInfo.builder()
                 .totalCount(totalCount)
                 .male(maleCount.get())
@@ -183,11 +185,46 @@ public class Statistics {
                 .build();
     }
 
-    private String getPlantInfo(String print) {
-        return print + " average weight on location " + locationService.getLocations().stream()
+    private String getPlantInfo() {
+        double totalPlantWeight = locationService.getLocations().stream()
                 .filter(location -> !location.isRiver())
                 .map(Location::getPlant)
                 .mapToDouble(Plant::getCurrentWeight)
-                .sum() / locationService.getLocations().stream().filter(location -> !location.isRiver()).count();
+                .sum();
+
+        if (initialPlantWeight == 0.0) initialPlantWeight = totalPlantWeight;
+        else lastPlantWeight = totalPlantWeight;
+
+        long countOfLocations = locationService.getLocations().stream().filter(location -> !location.isRiver()).count();
+
+        return PLANT_PRINT + " average weight on location " + totalPlantWeight/countOfLocations;
+    }
+
+    private void saveAnimalTypeInfo(Class<? extends Animal> clazz, long count) {
+        if (!initialNumberOfAnimals.containsKey(clazz)) initialNumberOfAnimals.put(clazz, count);
+        else lastNumberOfAnimals.put(clazz, count);
+    }
+
+    private void printFinalResult(long initialCount, long countLastDay, String print) {
+        String increaseOrDecrease = initialCount > countLastDay ? "↓ down" : "↑ up";
+        double percentageChange = initialCount > countLastDay? (double) (initialCount - countLastDay) / initialCount * 100 :
+                (double) (countLastDay - initialCount) / initialCount * 100;
+        System.out.printf("%s %-8s %-12s %-6s %.1f%% \n", print, initialCount, countLastDay, increaseOrDecrease,
+                percentageChange);
+    }
+
+    @Getter
+    public enum StateOfAnimal {
+        BE_EATEN("has been eaten", "have been eaten"),
+        DIED_OF_HUNGER("has been died of hunger", "have been died of hunger"),
+        BE_BORN("has been born", "were born");
+
+        private final String singular;
+        private final String plural;
+
+        StateOfAnimal(String singular, String plural) {
+            this.singular = singular;
+            this.plural = plural;
+        }
     }
 }

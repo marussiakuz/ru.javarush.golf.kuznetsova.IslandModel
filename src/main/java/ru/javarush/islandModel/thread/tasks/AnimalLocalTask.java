@@ -1,4 +1,4 @@
-package ru.javarush.islandModel.threads.tasks;
+package ru.javarush.islandModel.thread.tasks;
 
 import ru.javarush.islandModel.model.animal.Animal;
 import ru.javarush.islandModel.service.AnimalService;

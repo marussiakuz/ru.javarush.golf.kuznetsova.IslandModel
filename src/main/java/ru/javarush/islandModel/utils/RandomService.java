@@ -2,7 +2,6 @@ package ru.javarush.islandModel.utils;
 
 import ru.javarush.islandModel.model.animal.Animal;
 import ru.javarush.islandModel.model.animal.AnimalFactory;
-import ru.javarush.islandModel.model.animal.Eatable;
 import ru.javarush.islandModel.model.animal.predator.Predator;
 import ru.javarush.islandModel.model.island.Coordinate;
 import ru.javarush.islandModel.model.island.Location;
@@ -17,7 +16,7 @@ public class RandomService {
     private static final Map<Class<? extends Animal>, Integer> MAX_COUNT_OF_BROOD;
     private static final Map<Class<? extends Animal>, Integer> MAX_COUNT_ON_LOCATION;
     private static final Map<Class<? extends Animal>, Integer> MAX_COUNT_OF_STEPS;
-    private static final Map<Class<? extends Predator>, Map<Class<? extends Eatable>, Integer>> FOOD_PREFERENCES;
+    private static final Map<Class<? extends Predator>, Map<Class<? extends Animal>, Integer>> FOOD_PREFERENCES;
 
     static {
         MAX_COUNT_OF_STEPS = Settings.getSettings().getMaxCountOfSteps();
@@ -40,7 +39,7 @@ public class RandomService {
         return available.get(ThreadLocalRandom.current().nextInt(available.size()));
     }
 
-    public static boolean haveEaten(Predator predator, Eatable eatable) {
+    public static boolean haveEaten(Predator predator, Animal eatable) {
         return ThreadLocalRandom.current().nextInt(100) + 1
                 <= FOOD_PREFERENCES.get(predator.getClass()).get(eatable.getClass());
     }
@@ -57,6 +56,4 @@ public class RandomService {
         int count = ThreadLocalRandom.current().nextInt(entry.getValue() + 1);
         return Map.entry(entry.getKey(), AnimalFactory.getCertainNumberOfAnimals(entry.getKey(), count, coordinate));
     }
-
-
 }

@@ -19,12 +19,14 @@ public class DefaultSettings {
     public  static final double MAX_WEIGHT_OF_PLANT = 200.0;
     public  static final String PLANT_PRINT = "\uD83C\uDF3F";
     public  static final Map<Class<? extends Animal>, Integer> MAX_COUNT_OF_STEPS = new HashMap<>();
-    public  static final Map<Class<? extends Predator>, Map<Class<? extends Eatable>, Integer>> FOOD_PREFERENCES = new HashMap<>();
+    public  static final Map<Class<? extends Predator>, Map<Class<? extends Animal>, Integer>> FOOD_PREFERENCES = new HashMap<>();
     public  static final Map<Class<? extends Animal>, Double> DAILY_ALLOWANCE = new HashMap<>();
     public  static final Map<Class<? extends Animal>, Double> ANIMAL_AVG_WEIGHT = new HashMap<>();
     public  static final Map<Class<? extends Animal>, Integer> MAX_COUNT_BROOD = new HashMap<>();
     public  static final Map<Class<? extends Animal>, Integer> MAX_COUNT_ON_LOCATION = new HashMap<>();
     public  static final Map<Class<? extends Animal>, String> ANIMAL_PRINTS = new HashMap<>();
+    public static final int CRITICAL_NUMBER_EXTINCT_TYPES = 1;
+    public static boolean GET_ON_LOCATION_STATISTICS = false;
     public static final int CORE_POOL_SIZE = 4;
 
     static {

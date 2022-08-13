@@ -1,4 +1,4 @@
-package ru.javarush.islandModel.threads;
+package ru.javarush.islandModel.thread;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;

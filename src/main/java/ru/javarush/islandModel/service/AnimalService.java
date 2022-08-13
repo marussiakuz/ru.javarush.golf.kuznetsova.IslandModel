@@ -7,7 +7,6 @@ import ru.javarush.islandModel.model.Plant;
 
 import ru.javarush.islandModel.utils.Statistics;
 import ru.javarush.islandModel.model.animal.Animal;
-import ru.javarush.islandModel.model.animal.Eatable;
 import ru.javarush.islandModel.model.animal.herbivore.*;
 import ru.javarush.islandModel.model.animal.predator.*;
 import ru.javarush.islandModel.model.island.Coordinate;
@@ -66,7 +65,7 @@ public class AnimalService {
         if(isLockAcquired) {
             try {
                 if (animal instanceof Predator) {
-                    List<Eatable> potentialVictims = getPotentialVictims(animal);
+                    List<Animal> potentialVictims = getPotentialVictims(animal);
                     if (!potentialVictims.isEmpty()) hunt(animal, potentialVictims);
                     else animal.starve();
                 }
@@ -123,7 +122,7 @@ public class AnimalService {
         }
     }
 
-    private List<Eatable> getPotentialVictims(Animal animal) {
+    private List<Animal> getPotentialVictims(Animal animal) {
         Location current = locationRepository.getLocationByCoordinate(animal.getCurrentCoordinate());
         return current.getEatablesOfCertainTypes(Settings.getSettings().getFoodPreferences().get(animal.getClass()).keySet());
     }
@@ -155,13 +154,13 @@ public class AnimalService {
         }
     }
 
-    private void hunt(Animal animal, List<Eatable> localPotentialVictims) {
-        for (Eatable localPotentialVictim : localPotentialVictims) {
+    private void hunt(Animal animal, List<Animal> localPotentialVictims) {
+        for (Animal localPotentialVictim : localPotentialVictims) {
             if (!animal.isHungry()) break;
             if (RandomService.haveEaten((Predator) animal, localPotentialVictim)) {
-                double victimWeight = ((Animal) localPotentialVictim).getCurrentWeight();
+                double victimWeight = localPotentialVictim.getCurrentWeight();
                 double currentSaturationWithFood = animal.getSaturationWithFood() + victimWeight;
-                delete((Animal) localPotentialVictim);
+                delete(localPotentialVictim);
                 animal.setCurrentWeight(animal.getCurrentWeight() + victimWeight);
                 animal.setSaturationWithFood(Math.min(currentSaturationWithFood, DAILY_ALLOWANCE.get(animal.getClass())));
                 Statistics.addEatenAnimal(localPotentialVictim.getClass());

@@ -40,12 +40,11 @@ public class Location {
         return !isRiver && Settings.getSettings().getMaxCountOnLocation().get(clazz) > animals.get(clazz).size();
     }
 
-    public List<Eatable> getEatablesOfCertainTypes(Set<Class<? extends Eatable>> types) {
-        return types.stream()
+    public List<Animal> getEatablesOfCertainTypes(Set<Class<? extends Animal>> eatableTypes) {
+        return eatableTypes.stream()
                 .map(clazz -> animals.get(clazz))
                 .filter(Objects::nonNull)
                 .flatMap(Collection::stream)
-                .map(animal -> (Eatable) animal)
                 .collect(Collectors.toList());
     }
 

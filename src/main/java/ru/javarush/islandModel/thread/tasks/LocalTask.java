@@ -1,4 +1,4 @@
-package ru.javarush.islandModel.threads.tasks;
+package ru.javarush.islandModel.thread.tasks;
 
 public abstract class LocalTask {
 

@@ -9,8 +9,8 @@ import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
 import ru.javarush.islandModel.model.animal.Animal;
-import ru.javarush.islandModel.model.animal.Eatable;
 import ru.javarush.islandModel.model.animal.predator.Predator;
+import ru.javarush.islandModel.utils.Statistics;
 
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -30,12 +30,14 @@ public class Settings {
     private double maxWeightOfPlant;
     private String plantPrint;
     private Map<Class<? extends Animal>, Integer> maxCountOfSteps = new ConcurrentHashMap<>();
-    private Map<Class<? extends Predator>, Map<Class<? extends Eatable>, Integer>> foodPreferences = new ConcurrentHashMap<>();
+    private Map<Class<? extends Predator>, Map<Class<? extends Animal>, Integer>> foodPreferences = new ConcurrentHashMap<>();
     private Map<Class<? extends Animal>, Double> dailyAllowance = new ConcurrentHashMap<>();
     private Map<Class<? extends Animal>, Double> weightAvg = new ConcurrentHashMap<>();
     private Map<Class<? extends Animal>, Integer> maxCountOfBrood = new ConcurrentHashMap<>();
     private Map<Class<? extends Animal>, Integer> maxCountOnLocation = new ConcurrentHashMap<>();
     private Map<Class<? extends Animal>, String> animalPrints = new ConcurrentHashMap<>();
+    private int criticalNumberExtinctTypes;
+    private boolean getOnLocationStatistics;
     private int corePoolSize;
 
     @JsonIgnore
@@ -54,6 +56,10 @@ public class Settings {
         return settings;
     }
 
+    public boolean isGameOver() {
+        return Statistics.isHaveCriticalNumberOfAnimalsDied();
+    }
+
     private void setDefaultSettings() {
         width = DefaultSettings.WIDTH;
         length = DefaultSettings.LENGTH;
@@ -70,6 +76,8 @@ public class Settings {
         maxCountOnLocation = DefaultSettings.MAX_COUNT_ON_LOCATION;
         animalPrints = DefaultSettings.ANIMAL_PRINTS;
         corePoolSize = DefaultSettings.CORE_POOL_SIZE;
+        criticalNumberExtinctTypes = DefaultSettings.CRITICAL_NUMBER_EXTINCT_TYPES;
+        getOnLocationStatistics = DefaultSettings.GET_ON_LOCATION_STATISTICS;
     }
 
     private void loadSettingsFromYml() {

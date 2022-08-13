@@ -1,12 +1,12 @@
-package ru.javarush.islandModel.threads;
+package ru.javarush.islandModel.thread;
 
 import ru.javarush.islandModel.model.animal.Animal;
 import ru.javarush.islandModel.model.island.Location;
 import ru.javarush.islandModel.service.AnimalService;
 import ru.javarush.islandModel.service.LocationService;
-import ru.javarush.islandModel.threads.tasks.AnimalLocalTask;
-import ru.javarush.islandModel.threads.tasks.LocalTask;
-import ru.javarush.islandModel.threads.tasks.PlantLocalTask;
+import ru.javarush.islandModel.thread.tasks.AnimalLocalTask;
+import ru.javarush.islandModel.thread.tasks.LocalTask;
+import ru.javarush.islandModel.thread.tasks.PlantLocalTask;
 
 import java.util.List;
 import java.util.Objects;

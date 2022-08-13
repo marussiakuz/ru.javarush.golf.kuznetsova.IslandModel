@@ -1,7 +1,9 @@
 package ru.javarush.islandModel.model;
 
 import lombok.Builder;
+import lombok.Getter;
 
+@Getter
 @Builder
 public class AnimalTypeInfo {
     private String print;

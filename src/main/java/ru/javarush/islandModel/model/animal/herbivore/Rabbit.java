@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import ru.javarush.islandModel.model.animal.Animal;
-import ru.javarush.islandModel.model.animal.Eatable;
 import ru.javarush.islandModel.settings.Settings;
 
 import java.util.concurrent.ThreadLocalRandom;
@@ -13,7 +12,7 @@ import java.util.concurrent.ThreadLocalRandom;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Builder
-public class Rabbit extends Animal implements Herbivore, Eatable {
+public class Rabbit extends Animal implements Herbivore {
     private static double weightAvg = Settings.getSettings().getWeightAvg().get(Rabbit.class);
     private static double dailyAllowance = Settings.getSettings().getDailyAllowance().get(Rabbit.class);
 

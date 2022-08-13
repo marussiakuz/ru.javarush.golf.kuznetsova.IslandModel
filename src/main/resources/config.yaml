@@ -147,3 +147,5 @@ animalPrints:
   ru.javarush.islandModel.model.animal.predator.Fox: "\U0001f98a"
   ru.javarush.islandModel.model.animal.predator.Bear: "\U0001f43b"
 corePoolSize: 4
+criticalNumberExtinctTypes: 2
+getOnLocationStatistics: false
