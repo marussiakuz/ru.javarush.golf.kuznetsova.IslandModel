@@ -1,5 +1,10 @@
-ru.javarush.golf.kuznetsova.IslandModel
-# IslandModel
+# <h1 align="center">IslandModel </h1>
+
+## Description:
+
+an app simulating the life of animals (carnivores, predarors) and plants on the island.
+
+<hr>
 
 ## The game implements the following functionality: 
 
@@ -19,14 +24,20 @@ number of extinct animal species. The game will end anyway if all the animals di
 
 You can also turn on or off the printing of statistics by location in the config.yaml.
 
-The approximate data output looks like this:
+<hr>
+
+* The approximate data output looks like this:
 
 <img width="600" alt="Снимок экрана 2022-08-13 в 22 39 59" src="https://user-images.githubusercontent.com/96682553/184510187-3e397d62-5a87-421c-92f5-6531f56f9d14.png">
 
-If the output of statistics for each location is enabled:
+<hr>
+
+* If the output of statistics for each location is enabled:
 
 <img width="944" alt="Снимок экрана 2022-08-13 в 22 43 20" src="https://user-images.githubusercontent.com/96682553/184510309-bfd8cfa0-fa54-41b3-a730-a6b0cef37631.png">
 
-End of the game:
+<hr>
+
+* End of the game:
 
 <img width="861" alt="Снимок экрана 2022-08-13 в 22 42 37" src="https://user-images.githubusercontent.com/96682553/184510276-f832b97f-7f3c-4c62-a273-40e030de296f.png">
